@@ -266,8 +266,7 @@ function mostrarTabla(atletas, elementId) {
     `;
 
     atletas.forEach(atleta => {
-        // CORRECCIÓN DE FOTO: Verifica si el BackEnd envía el Base64 con o sin prefijo.
-        // Si no viene el prefijo, se lo agrega para que la etiqueta <img> pueda renderizarla.
+        
         let imgSrc = '';
         if (atleta.fotoBase64) {
             if (atleta.fotoBase64.startsWith('data:image')) {
