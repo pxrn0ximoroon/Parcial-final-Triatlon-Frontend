@@ -22,7 +22,9 @@ function crearAtleta() {
     if (file) {
         const reader = new FileReader();
         reader.onloadend = function(e) {
-            atleta.foto = e.target.result.split(',')[1];
+            // Se quitó el split(',')[1] porque es mejor manejar el Base64 completo 
+            // y así garantizar que la imagen se pueda mostrar después fácilmente.
+            atleta.foto = e.target.result; 
             enviarAtleta(atleta);
             enviando = false;
         };
@@ -65,7 +67,8 @@ function enviarAtleta(atleta) {
 function modificarNombre() {
     const id = document.getElementById('idAtleta').value;
     const nombre = document.getElementById('nuevoNombre').value;
-    fetch(`${BASE_URL}/${id}/nombre?nombre=${nombre}`, { method: 'PUT' })
+    // CORRECCIÓN: encodeURIComponent para evitar errores con espacios
+    fetch(`${BASE_URL}/${id}/nombre?nombre=${encodeURIComponent(nombre)}`, { method: 'PUT' })
     .then(response => {
         if (!response.ok) return manejarError(response);
         return response.json();
@@ -81,7 +84,7 @@ function modificarNombre() {
 function modificarIdentificacion() {
     const id = document.getElementById('idAtleta').value;
     const identificacion = document.getElementById('nuevaIdentificacion').value;
-    fetch(`${BASE_URL}/${id}/identificacion?identificacion=${identificacion}`, { method: 'PUT' })
+    fetch(`${BASE_URL}/${id}/identificacion?identificacion=${encodeURIComponent(identificacion)}`, { method: 'PUT' })
     .then(response => {
         if (!response.ok) return manejarError(response);
         return response.json();
@@ -97,7 +100,7 @@ function modificarIdentificacion() {
 function modificarCategoria() {
     const id = document.getElementById('idAtleta').value;
     const categoria = document.getElementById('nuevaCategoria').value;
-    fetch(`${BASE_URL}/${id}/categoria?categoria=${categoria}`, { method: 'PUT' })
+    fetch(`${BASE_URL}/${id}/categoria?categoria=${encodeURIComponent(categoria)}`, { method: 'PUT' })
     .then(response => {
         if (!response.ok) return manejarError(response);
         return response.json();
@@ -113,7 +116,7 @@ function modificarCategoria() {
 function modificarEspecialidad() {
     const id = document.getElementById('idAtleta').value;
     const especialidad = document.getElementById('nuevaEspecialidad').value;
-    fetch(`${BASE_URL}/${id}/especialidad?especialidad=${especialidad}`, { method: 'PUT' })
+    fetch(`${BASE_URL}/${id}/especialidad?especialidad=${encodeURIComponent(especialidad)}`, { method: 'PUT' })
     .then(response => {
         if (!response.ok) return manejarError(response);
         return response.json();
@@ -144,7 +147,7 @@ function modificarCross() {
 
 function consultarPorIdentificacion() {
     const identificacion = document.getElementById('buscarIdentificacion').value;
-    fetch(`${BASE_URL}/identificacion/${identificacion}`)
+    fetch(`${BASE_URL}/identificacion/${encodeURIComponent(identificacion)}`)
     .then(response => {
         if (!response.ok) return manejarError(response);
         return response.json();
@@ -159,7 +162,7 @@ function consultarPorIdentificacion() {
 
 function consultarPorGenero() {
     const genero = document.getElementById('buscarGenero').value;
-    fetch(`${BASE_URL}/genero/${genero}`)
+    fetch(`${BASE_URL}/genero/${encodeURIComponent(genero)}`)
     .then(response => {
         if (!response.ok) return manejarError(response);
         return response.json();
@@ -174,7 +177,7 @@ function consultarPorGenero() {
 
 function consultarPorCategoria() {
     const categoria = document.getElementById('buscarCategoria').value;
-    fetch(`${BASE_URL}/categoria/${categoria}`)
+    fetch(`${BASE_URL}/categoria/${encodeURIComponent(categoria)}`)
     .then(response => {
         if (!response.ok) return manejarError(response);
         return response.json();
@@ -189,7 +192,7 @@ function consultarPorCategoria() {
 
 function consultarPorEspecialidad() {
     const especialidad = document.getElementById('buscarEspecialidad').value;
-    fetch(`${BASE_URL}/especialidad/${especialidad}`)
+    fetch(`${BASE_URL}/especialidad/${encodeURIComponent(especialidad)}`)
     .then(response => {
         if (!response.ok) return manejarError(response);
         return response.json();
@@ -204,7 +207,7 @@ function consultarPorEspecialidad() {
 
 function consultarPorCross() {
     const cross = document.getElementById('buscarCross').value;
-    fetch(`${BASE_URL}/cross/${cross}`)
+    fetch(`${BASE_URL}/cross/${encodeURIComponent(cross)}`)
     .then(response => {
         if (!response.ok) return manejarError(response);
         return response.json();
@@ -219,7 +222,7 @@ function consultarPorCross() {
 
 function eliminarAtleta() {
     const identificacion = document.getElementById('idEliminar').value;
-    fetch(`${BASE_URL}/identificacion/${identificacion}`, {
+    fetch(`${BASE_URL}/identificacion/${encodeURIComponent(identificacion)}`, {
         method: 'DELETE'
     })
     .then(response => {
@@ -263,6 +266,17 @@ function mostrarTabla(atletas, elementId) {
     `;
 
     atletas.forEach(atleta => {
+        // CORRECCIÓN DE FOTO: Verifica si el BackEnd envía el Base64 con o sin prefijo.
+        // Si no viene el prefijo, se lo agrega para que la etiqueta <img> pueda renderizarla.
+        let imgSrc = '';
+        if (atleta.fotoBase64) {
+            if (atleta.fotoBase64.startsWith('data:image')) {
+                imgSrc = atleta.fotoBase64;
+            } else {
+                imgSrc = `data:image/jpeg;base64,${atleta.fotoBase64}`;
+            }
+        }
+
         tabla += `
             <tr>
                 <td>${atleta.id}</td>
@@ -274,8 +288,8 @@ function mostrarTabla(atletas, elementId) {
                 <td>${atleta.categoria}</td>
                 <td>${atleta.especialidad}</td>
                 <td>${atleta.modalidadCross ? 'Sí' : 'No'}</td>
-                <td>${atleta.fotoBase64 ?
-                    `<img src="${atleta.fotoBase64}" class="foto-atleta">`
+                <td>${imgSrc ? 
+                    `<img src="${imgSrc}" class="foto-atleta" style="max-width: 50px; max-height: 50px; border-radius: 5px;">` 
                     : 'Sin foto'}</td>
             </tr>
         `;

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Categoría</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+<body>
+
+     <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../../index.html"><span class="material-icons">directions_run</span> Triatlón App</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarMenu">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="../../index.html"><span class="material-icons">home</span> Inicio</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><span class="material-icons">manage_accounts</span> Atletas</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../crear.html"><span class="material-icons">person_add</span> Registrar</a></li>
+                            <li><a class="dropdown-item" href="../consultar.html"><span class="material-icons">search</span> Consultar</a></li>
+                            <li><a class="dropdown-item" href="../modificar.html"><span class="material-icons">edit</span> Modificar</a></li>
+                            <li><a class="dropdown-item" href="../eliminar.html"><span class="material-icons">delete</span> Eliminar</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown"><span class="material-icons">directions_bike</span> Carreras</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="crear.html"><span class="material-icons">add_road</span> Crear</a></li>
+                            <li><a class="dropdown-item" href="consultar.html"><span class="material-icons">search</span> Consultar</a></li>
+                            <li><a class="dropdown-item" href="modificar.html"><span class="material-icons">edit</span> Modificar</a></li>
+                            <li><a class="dropdown-item" href="eliminar.html"><span class="material-icons">delete</span> Eliminar</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><span class="material-icons">category</span> Categorías</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../categorias/crear.html"><span class="material-icons">post_add</span> Crear</a></li>
+                            <li><a class="dropdown-item" href="../categorias/consultar.html"><span class="material-icons">search</span> Consultar</a></li>
+                            <li><a class="dropdown-item" href="../categorias/modificar.html"><span class="material-icons">edit</span> Modificar</a></li>
+                            <li><a class="dropdown-item" href="../categorias/eliminar.html"><span class="material-icons">delete</span> Eliminar</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section class="container py-5">
+        <h2 class="text-center mb-4">Modificar Categoría</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label class="form-label">ID de la Categoría</label>
+                    <input type="number" class="form-control" id="idCategoriaModificar" placeholder="Ingrese el ID">
+                </div>
+                <div class="mb-4">
+                    <label class="form-label">Modificar Descripción</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="nuevaDescripcion" placeholder="Nueva descripción">
+                        <button type="button" class="btn btn-warning" onclick="modificarDescripcion()"><span class="material-icons">save</span></button>
+                    </div>
+                    <div id="mensajeModDesc" class="mt-2"></div>
+                </div>
+                <div class="mb-4">
+                    <label class="form-label">Modificar Recomendación</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="nuevaRecomendacion" placeholder="Nueva recomendación">
+                        <button type="button" class="btn btn-warning" onclick="modificarRecomendacion()"><span class="material-icons">save</span></button>
+                    </div>
+                    <div id="mensajeModRec" class="mt-2"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../js/categoria.js"></script>
+</body>
+</html>

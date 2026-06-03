@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consultar Atletas</title>
+    <title>Modificar Carrera</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../../css/styles.css">
 </head>
 <body>
 
@@ -50,95 +50,34 @@
     </nav>
 
     <section class="container py-5">
-        <h2 class="text-center mb-4">Consultar Atletas</h2>
-
-        <div class="row justify-content-center mb-4">
+        <h2 class="text-center mb-4">Modificar Carrera</h2>
+        <div class="row justify-content-center">
             <div class="col-md-6">
-
                 <div class="mb-3">
-                    <label class="form-label">Buscar por Identificación</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="buscarIdentificacion">
-                        <button class="btn btn-primary" onclick="consultarPorIdentificacion()">
-                            <span class="material-icons">search</span>
-                        </button>
-                    </div>
+                    <label class="form-label">ID de la Carrera</label>
+                    <input type="number" class="form-control" id="idCarreraModificar" placeholder="Ingrese el ID">
                 </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Filtrar por Género</label>
+                <div class="mb-4">
+                    <label class="form-label">Modificar Ubicación</label>
                     <div class="input-group">
-                        <select class="form-select" id="buscarGenero">
-                            <option value="MASCULINO">Masculino</option>
-                            <option value="FEMENINO">Femenino</option>
-                        </select>
-                        <button class="btn btn-primary" onclick="consultarPorGenero()">
-                            <span class="material-icons">filter_list</span>
-                        </button>
+                        <input type="text" class="form-control" id="nuevaUbicacion" placeholder="Nueva ubicación">
+                        <button type="button" class="btn btn-warning" onclick="modificarUbicacion()"><span class="material-icons">save</span></button>
                     </div>
+                    <div id="mensajeUbicacion" class="mt-2"></div>
                 </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Filtrar por Categoría</label>
+                <div class="mb-4">
+                    <label class="form-label">Modificar Fecha</label>
                     <div class="input-group">
-                        <select class="form-select" id="buscarCategoria">
-                            <option value="PRE_BENJAMIN">Pre-Benjamín</option>
-                            <option value="BENJAMIN">Benjamín</option>
-                            <option value="ALEVIN">Alevín</option>
-                            <option value="INFANTIL">Infantil</option>
-                            <option value="CADETE">Cadete</option>
-                            <option value="JUVENIL">Juvenil</option>
-                            <option value="JUNIOR">Júnior</option>
-                            <option value="SUB23">Sub-23</option>
-                            <option value="ABSOLUTA">Absoluta</option>
-                            <option value="VETERANO1">Veterano 1</option>
-                            <option value="VETERANO2">Veterano 2</option>
-                            <option value="VETERANO3">Veterano 3</option>
-                        </select>
-                        <button class="btn btn-primary" onclick="consultarPorCategoria()">
-                            <span class="material-icons">filter_list</span>
-                        </button>
+                        <input type="date" class="form-control" id="nuevaFecha">
+                        <button type="button" class="btn btn-warning" onclick="modificarFecha()"><span class="material-icons">save</span></button>
                     </div>
+                    <div id="mensajeFecha" class="mt-2"></div>
                 </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Filtrar por Especialidad</label>
-                    <div class="input-group">
-                        <select class="form-select" id="buscarEspecialidad">
-                            <option value="SUPER_SPRINT">SuperSprint</option>
-                            <option value="SPRINT">Sprint</option>
-                            <option value="OLIMPICA">Olímpica</option>
-                            <option value="MEDIA_DISTANCIA">Media Distancia</option>
-                            <option value="LARGA_DISTANCIA">Larga Distancia</option>
-                            <option value="ULTRAMAN">Ultraman</option>
-                        </select>
-                        <button class="btn btn-primary" onclick="consultarPorEspecialidad()">
-                            <span class="material-icons">filter_list</span>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Filtrar por Modalidad Cross</label>
-                    <div class="input-group">
-                        <select class="form-select" id="buscarCross">
-                            <option value="true">Sí</option>
-                            <option value="false">No</option>
-                        </select>
-                        <button class="btn btn-primary" onclick="consultarPorCross()">
-                            <span class="material-icons">filter_list</span>
-                        </button>
-                    </div>
-                </div>
-
             </div>
         </div>
-
-        <div id="resultado"></div>
-
     </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/atleta.js"></script>
+    <script src="../../js/carrera.js"></script>
 </body>
 </html>
